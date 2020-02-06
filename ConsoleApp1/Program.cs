@@ -15,6 +15,9 @@ namespace ConsoleApp1
             /// How many bytes to let the BigIntegers be
             /// </summary>
             MaxPrimeSizeInBytes = 100_000,
+            /// <summary>
+            /// How many bytes the BigIntegers must be at least
+            /// </summary>
             MinPrimeSizeInBytes = 16,
         }
         /// <summary>
@@ -36,7 +39,7 @@ namespace ConsoleApp1
                 {
                     Console.WriteLine("Please input a number that's less than {0}", ((int)Config.MaxPrimeSizeInBytes).ToString("N0"));
                 }
-                else if (bytesSize < (int)Config.MinPrimeSizeInBytes)
+                else if (bytesSize <= (int)Config.MinPrimeSizeInBytes)
                 {
                     Console.WriteLine("Please input a number that's greater than {0}", ((int)Config.MinPrimeSizeInBytes).ToString("N0"));
                 }
@@ -78,10 +81,11 @@ namespace ConsoleApp1
             }
         }
         /// <summary>
-        /// Generates only posiive bigints
+        /// Generates only positive bigints
         /// </summary>
-        /// <param name="random"></param>
-        /// <returns></returns>
+        /// <param name="random">a reference to the random object to be used</param>
+        /// <param name="bytesSize">the size of the bigint in bytes</param>
+        /// <returns>A positive BigInteger</returns>
         static private BigInteger GenerateRandomBigInt(Random random, int bytesSize)
         {
             byte[] bytes = new byte[bytesSize+1];
